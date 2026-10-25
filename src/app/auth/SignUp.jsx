@@ -1,6 +1,11 @@
+import { useMutation } from "convex/react";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useContext, useState } from "react";
 import { Alert, Image, Text, View } from "react-native";
+import { UserContext } from "../../../context/UserContext";
+import { api } from "../../../convex/_generated/api";
+import { auth } from "../../../services/FirebaseConfig";
 import Button from "../components/shared/Button";
 import Input from "../components/shared/Input";
 
@@ -9,12 +14,41 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const createNewUser = useMutation(api.Users.CreateNewUser);
+  const { user, setUser } = useContext(UserContext);
+
   const onSignIn = () => {
     if (!name || !email || !password) {
       Alert.alert("Missing Fields!", "Enter All field Values");
       return;
     }
+
+    // const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user);
+        if (user) {
+          const result = await createNewUser({
+            name: name,
+            email: email,
+          });
+          console.log(result);
+          setUser(result);
+        }
+
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+
+        // ..
+      });
   };
+
   return (
     <View
       style={{

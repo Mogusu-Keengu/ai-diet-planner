@@ -6,7 +6,7 @@ const Input = ({ placeholder, password = false, onChangeText, value }) => {
       value={value}
       placeholder={placeholder}
       secureTextEntry={password}
-      onChange={(value) => onChangeText(value)}
+      onChangeText={(value) => onChangeText(value)}
       style={{
         padding: 15,
         borderWidth: 1,
