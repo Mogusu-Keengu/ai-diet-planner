@@ -6,7 +6,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import { Tabs } from "expo-router";
-import Colors from "../shared/Colors";
+import Colors from "../../shared/Colors";
 
 const TabLayout = () => {
   return (

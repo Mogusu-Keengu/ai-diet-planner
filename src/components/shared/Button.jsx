@@ -1,5 +1,5 @@
-import Colors from "@/app/shared/Colors";
 import { Text, TouchableOpacity } from "react-native";
+import Colors from "../../shared/Colors";
 
 const Button = ({ title, onPress }) => {
   return (

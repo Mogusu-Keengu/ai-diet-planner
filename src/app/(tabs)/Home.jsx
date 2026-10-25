@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!user?.weight) {
-      router.replace("/src/app/preference");
+      router.replace("/preference");
     }
   }, [user]);
   return (

@@ -6,8 +6,8 @@ import { Alert, Image, Text, View } from "react-native";
 import { UserContext } from "../../../context/UserContext";
 import { api } from "../../../convex/_generated/api";
 import { auth } from "../../../services/FirebaseConfig";
-import Button from "../components/shared/Button";
-import Input from "../components/shared/Input";
+import Button from "../../components/shared/Button";
+import Input from "../../components/shared/Input";
 
 const SignUp = () => {
   const [name, setName] = useState("");
