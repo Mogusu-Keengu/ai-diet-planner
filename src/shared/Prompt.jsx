@@ -1,7 +1,22 @@
-const CALORIES_PROMPT = `Based on Weight, Height, Gender, Goal give me calories and proteins I need daily Consider Age as 28 in Json format and follow the schema:
+export default {
+  CALORIES_PROMPT: `Based on Weight, Height, Gender, Goal give me calories and proteins I need daily Consider Age as 28 in Json format and follow the schema:
+    {
+        calories: <>,
+        proteins: <>
+    }`,
+  GENERATE_RECIPE_OPTION_PROMPT: `
+Give me 3 different recipe variants using the ingredients or idea above.
+Respond with JSON only, no extra text, no markdown, following this schema:
 {
-    calories: <>,
-    proteins: <>
-}`;
-
-export default { CALORIES_PROMPT };
+  "recipes": [
+    {
+      "recipeName": "<string>",
+      "description": "<string, max 2 lines>",
+      "ingredients": ["<string>"],
+      "steps": ["<string, one clear action per step>"]
+    }
+  ]
+}`,
+  //   GENERATE_RECIPE_OPTION_PROMPT: `:Depends on user instructions create 3 different Recipe Variants with Recipe Name with emoji
+  //     2 line description and main ingredients list in JSON format with fiels recipeName, description, ingredients(without size) only`,
+};

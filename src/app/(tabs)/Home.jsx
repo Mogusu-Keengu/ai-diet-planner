@@ -5,6 +5,7 @@ import { UserContext } from "../../../context/UserContext";
 import GenerateRecipeCard from "../../components/GenerateRecipeCard";
 import HomeHeader from "../../components/HomeHeader";
 import TodayProgress from "../../components/TodayProgress";
+import TodaysMealPlan from "../../components/TodaysMealPlan";
 
 const Home = () => {
   const { user } = useContext(UserContext);
@@ -24,6 +25,7 @@ const Home = () => {
       <HomeHeader />
       <TodayProgress />
       <GenerateRecipeCard />
+      <TodaysMealPlan />
     </View>
   );
 };

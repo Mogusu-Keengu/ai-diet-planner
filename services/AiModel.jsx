@@ -5,10 +5,19 @@ const openai = new OpenAI({
   apiKey: process.env.EXPO_PUBLIC_OPENROUTER_API_KEY,
 });
 
-export const CalculateCaloriesAI = async (PROMPT) =>
-  await openai.chat.completions.create({
-    model: "nvidia/nemotron-3-ultra-550b-a55b:free",
+const AIMODELNAME = "openai/gpt-4o-mini";
+
+export const CalculateCaloriesAI = async (PROMPT) => {
+  return await openai.chat.completions.create({
+    model: AIMODELNAME,
     messages: [{ role: "user", content: PROMPT }],
   });
+};
 
-// console.log(CalculateCalories.choices[0].message);
+export const GenerateRecipeOptionsAiModel = async (PROMPT) => {
+  console.log("AiModel running, model:", AIMODELNAME);
+  return await openai.chat.completions.create({
+    model: AIMODELNAME,
+    messages: [{ role: "user", content: PROMPT }],
+  });
+};
