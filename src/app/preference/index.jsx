@@ -12,9 +12,11 @@ import { useContext, useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { UserContext } from "../../../context/UserContext";
 import { api } from "../../../convex/_generated/api";
+import { CalculateCaloriesAI } from "../../../services/AiModel";
 import Button from "../../components/shared/Button";
 import Input from "../../components/shared/Input";
 import Colors from "../../shared/Colors";
+import Prompt from "../../shared/Prompt";
 
 const Preference = () => {
   const [weight, setWeight] = useState();
@@ -30,6 +32,7 @@ const Preference = () => {
       Alert.alert("Fill All details", "Enter all the details to continue");
       return;
     }
+
     const data = {
       uid: user?._id,
       weight: weight,
@@ -37,9 +40,21 @@ const Preference = () => {
       gender: gender,
       goal: goal,
     };
-    const result = await UpdateUserPref({ ...data });
+    // calculate calories
+    const PROMPT = JSON.stringify(data) + "\n" + Prompt.CALORIES_PROMPT;
+    console.log(PROMPT);
 
-    setUser((prev) => ({ ...prev, ...data }));
+    const AIResult = await CalculateCaloriesAI(PROMPT);
+    console.log(AIResult.choices[0].message.content);
+    const AIResp = AIResult.choices[0].message.content;
+    const JSONContent = JSON.parse(
+      AIResp.replace("```json", "").replace("```", ""),
+    );
+    console.log(JSONContent);
+
+    const result = await UpdateUserPref({ ...data, ...JSONContent });
+
+    setUser((prev) => ({ ...prev, ...data, ...JSONContent }));
 
     console.log(result);
     router.replace("/(tabs)/Home");

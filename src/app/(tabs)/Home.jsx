@@ -1,7 +1,10 @@
 import { useRouter } from "expo-router";
 import { useContext, useEffect } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { UserContext } from "../../../context/UserContext";
+import GenerateRecipeCard from "../../components/GenerateRecipeCard";
+import HomeHeader from "../../components/HomeHeader";
+import TodayProgress from "../../components/TodayProgress";
 
 const Home = () => {
   const { user } = useContext(UserContext);
@@ -13,8 +16,14 @@ const Home = () => {
     }
   }, [user]);
   return (
-    <View>
-      <Text>Home</Text>
+    <View
+      style={{
+        padding: 15,
+      }}
+    >
+      <HomeHeader />
+      <TodayProgress />
+      <GenerateRecipeCard />
     </View>
   );
 };
