@@ -14,7 +14,7 @@ export const CalculateCaloriesAI = async (PROMPT) => {
   });
 };
 
-export const GenerateRecipeOptionsAiModel = async (PROMPT) => {
+export const GenerateAIRecipe = async (PROMPT) => {
   console.log("AiModel running, model:", AIMODELNAME);
   return await openai.chat.completions.create({
     model: AIMODELNAME,
