@@ -5,4 +5,5 @@ export default {
   GRAY: "gray",
   BLUE: "#4287F5",
   PINK: "#F542b3",
+  SECONDARY: "#fbf5ff",
 };

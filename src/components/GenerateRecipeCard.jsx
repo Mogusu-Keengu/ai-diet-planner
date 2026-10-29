@@ -37,7 +37,7 @@ const GenerateRecipeCard = () => {
         Let Our AI generate personalized recipes just for you !
       </Text>
       <TouchableOpacity
-        onPress={() => router.push("/generate-ai-recipe")}
+        onPress={() => router.push("/recipe-detail")} //generate-ai-recipe
         style={{
           padding: 12,
           backgroundColor: Colors.WHITE,

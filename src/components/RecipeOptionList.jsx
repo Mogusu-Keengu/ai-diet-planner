@@ -1,4 +1,5 @@
 import { useMutation } from "convex/react";
+import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { UserContext } from "../../context/UserContext";
@@ -11,6 +12,7 @@ import LoadingDialog from "./LoadingDialog";
 const RecipeOptionList = ({ recipeOption }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
+  const router = useRouter();
   const CreateRecipe = useMutation(api.Recipes.CreateRecipe);
   const onRecipeOptionSelect = async (recipe) => {
     console.log("PRESSED");
@@ -43,6 +45,10 @@ const RecipeOptionList = ({ recipeOption }) => {
       console.log(saveRecipeResult);
 
       // Redirect to Recipe details Screen
+      router.push({
+        pathname: "/recipe-detail",
+        recipeId: saveRecipeResult,
+      });
 
       setLoading(false);
     } catch (error) {
