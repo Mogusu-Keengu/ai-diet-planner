@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useMutation } from "convex/react";
+import { useContext, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { GenerateAIRecipe } from "../../services/AiModel";
+import { UserContext } from "../../context/UserContext";
+import { api } from "../../convex/_generated/api";
+import { GenerateAIRecipe, GenerateRecipeImage } from "../../services/AiModel";
 import Colors from "../shared/Colors";
 import Prompt from "../shared/Prompt";
 import LoadingDialog from "./LoadingDialog";
 
 const RecipeOptionList = ({ recipeOption }) => {
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(UserContext);
+  const CreateRecipe = useMutation(api.Recipes.CreateRecipe);
   const onRecipeOptionSelect = async (recipe) => {
     console.log("PRESSED");
     setLoading(true);
@@ -23,6 +28,22 @@ const RecipeOptionList = ({ recipeOption }) => {
       const clean = raw.replace(/```json|```/g, "").trim();
       const parsed = JSON.parse(clean);
       console.log(parsed);
+      // Generate Recipe Image
+      const aiImageResp = await GenerateRecipeImage(parsed?.imagePrompt);
+      console.log(aiImageResp?.data?.image);
+
+      // Save to Database
+      const saveRecipeResult = await CreateRecipe({
+        jsonData: parsed,
+        imageUrl: aiImageResp?.data?.image,
+        recipeName: parsed?.recipeName,
+        uid: user?._id,
+      });
+
+      console.log(saveRecipeResult);
+
+      // Redirect to Recipe details Screen
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
