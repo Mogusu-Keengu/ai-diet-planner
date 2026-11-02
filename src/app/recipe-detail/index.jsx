@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { api } from "../../../convex/_generated/api";
 import RecipeIngredients from "../../components/RecipeIngredients";
 import RecipeIntro from "../../components/RecipeIntro";
+import RecipeSteps from "../../components/RecipeSteps";
 import Colors from "../../shared/Colors";
 export default function RecipeDetail() {
   const { recipeId } = useLocalSearchParams();
@@ -35,6 +36,7 @@ export default function RecipeDetail() {
           {/* {Recipe Ingredients} */}
           <RecipeIngredients recipeDetail={recipeDetail} />
           {/* cooking steps */}
+          <RecipeSteps recipeDetail={recipeDetail} />
         </SafeAreaView>
       }
     ></FlatList>

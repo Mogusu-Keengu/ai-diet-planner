@@ -1,8 +1,8 @@
 import {
-    Fire03Icon,
-    PlusSignSquareIcon,
-    ServingFoodIcon,
-    TimeQuarter02Icon,
+  Fire03Icon,
+  PlusSignSquareIcon,
+  ServingFoodIcon,
+  TimeQuarter02Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import { Image, StyleSheet, Text, View } from "react-native";
