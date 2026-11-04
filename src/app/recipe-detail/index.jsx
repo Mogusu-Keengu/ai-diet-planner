@@ -1,11 +1,12 @@
 import { useQuery } from "convex/react";
 import { useLocalSearchParams } from "expo-router";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { api } from "../../../convex/_generated/api";
 import RecipeIngredients from "../../components/RecipeIngredients";
 import RecipeIntro from "../../components/RecipeIntro";
 import RecipeSteps from "../../components/RecipeSteps";
+import Button from "../../components/shared/Button";
 import Colors from "../../shared/Colors";
 export default function RecipeDetail() {
   const { recipeId } = useLocalSearchParams();
@@ -37,6 +38,13 @@ export default function RecipeDetail() {
           <RecipeIngredients recipeDetail={recipeDetail} />
           {/* cooking steps */}
           <RecipeSteps recipeDetail={recipeDetail} />
+          <View
+            style={{
+              marginTop: 15,
+            }}
+          >
+            <Button title={"Add to Meal Plan"} />
+          </View>
         </SafeAreaView>
       }
     ></FlatList>
